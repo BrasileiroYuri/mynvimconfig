@@ -93,3 +93,7 @@ and set:
 - nightfox
 - vague
 - cyberdream
+- rose-pine
+- koda
+
+## Enjoy

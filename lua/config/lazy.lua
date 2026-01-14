@@ -30,10 +30,9 @@ require("lazy").setup({
     lazy = false,
     version = false,
   },
-  install = { colorscheme = { "catppuccin", "habamax" } }, -- Use o nome real aqui
   checker = { enabled = true },
 })
 
 -- 5. Define o tema (O NOME É APENAS "catppuccin")
 -- Mesmo que seu arquivo seja "catppuccinm.lua", o plugin registra como "catppuccin"
-vim.cmd.colorscheme("kanagawa")
+vim.cmd.colorscheme("koda")

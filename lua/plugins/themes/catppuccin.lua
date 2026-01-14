@@ -10,8 +10,9 @@ return {
     flavour = "mocha",
     transparent_background = true,
     term_colors = true,
+    no_italic = true, -- Global switch to disable italics
 
-    -- Remove itálico de tudo
+    -- Basic style disabling
     styles = {
       comments = {},
       conditionals = {},
@@ -25,46 +26,45 @@ return {
       properties = {},
       types = {},
       operators = {},
+      miscs = {}, -- Added 'miscs' just in case
     },
 
-    -- O segredo para remover o fundo dos popups que sobraram:
     custom_highlights = function(colors)
       return {
-        -- Remove fundo de janelas flutuantes gerais
+        -- 1. TRANSPARENCY FIXES (From your previous config)
         NormalFloat = { bg = "NONE" },
         FloatBorder = { bg = "NONE" },
         FloatTitle = { bg = "NONE" },
-
-        -- Menus de Autocomplete (cmp)
         Pmenu = { bg = "NONE" },
-        PmenuSel = { bg = colors.surface1 }, -- Destaca a seleção levemente
+        PmenuSel = { bg = colors.surface1 },
         PmenuSbar = { bg = "NONE" },
         PmenuThumb = { bg = "NONE" },
-
-        -- Telescope (Busca de arquivos)
         TelescopeNormal = { bg = "NONE" },
         TelescopeBorder = { bg = "NONE" },
         TelescopePromptNormal = { bg = "NONE" },
         TelescopePromptBorder = { bg = "NONE" },
         TelescopeResultsNormal = { bg = "NONE" },
         TelescopeTitle = { bg = "NONE" },
-
-        -- NeoTree (Barra lateral)
         NeoTreeNormal = { bg = "NONE" },
         NeoTreeNormalNC = { bg = "NONE" },
         NeoTreeWinSeparator = { bg = "NONE" },
-
-        -- WhichKey (O menu de ajuda da sua imagem)
         WhichKeyFloat = { bg = "NONE" },
-
-        -- Lazy (Gerenciador de plugins)
         LazyNormal = { bg = "NONE" },
-
-        -- Mason (Gerenciador de LSP)
         MasonNormal = { bg = "NONE" },
-
-        -- Snacks (Novo picker do LazyVim)
         SnacksNormal = { bg = "NONE" },
+
+        -- 2. C++ ITALIC REMOVAL (TreeSitter Overrides)
+        -- This forces specific syntax elements to have NO style (removing italics)
+        ["@type.builtin"] = { style = {} }, -- void, int, bool, char
+        ["@type"] = { style = {} }, -- Class names (BarChart)
+        ["@namespace"] = { style = {} }, -- std, huff
+        ["@keyword"] = { style = {} }, -- const, static, return
+        ["@keyword.function"] = { style = {} }, -- Functions defined as keywords
+        ["@variable"] = { style = {} }, -- Standard variables
+        ["@variable.member"] = { style = {} }, -- Member variables (m_main_title)
+        ["@variable.parameter"] = { style = {} }, -- Function parameters
+        ["@function"] = { style = {} }, -- Function names
+        ["@function.macro"] = { style = {} }, -- Macros
       }
     end,
 
